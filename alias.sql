@@ -3,4 +3,5 @@
 SELECT CONCAT_WS(" ", contactLastName, contactFirstName) FROM customers
 SELECT CONCAT_WS(" ", contactLastName, contactFirstName) AS contactFullName FROM customers
 
-
+-- MySQL은 아래와 같은 축약어도 사용이 가능하다.
+SELECT orderNumber `Order no.`, SUM(priceEach * quantityOrdered) total FROM orderdetails GROUP BY `Order no.` HAVING total > 60000;
