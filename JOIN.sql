@@ -21,6 +21,7 @@ SELECT * FROM members;
 SELECT * FROM committees;
 
 -- INNER JOIN
+-- USING을 사용하여 컬럼을 매칭시킬 수 있다.
 SELECT
 m.member_id,
 m.name AS member,
@@ -28,3 +29,13 @@ c.committee_id,
 c.name AS committee
 FROM members m 
 INNER JOIN committees c ON m.name = c.name;
+
+SELECT 
+    m.member_id, 
+    m.name AS member, 
+    c.committee_id, 
+    c.name AS committee
+FROM
+    members m
+INNER JOIN committees c USING(name);
+
