@@ -20,7 +20,7 @@ INSERT INTO committees(name) VALUES('John'),('Mary'),('Amelia'),('Joe');
 SELECT * FROM members;
 SELECT * FROM committees;
 
--- INNER JOIN
+-- INNER JOIN / RIGHT JOIN / OUTER JOIN / CROSS JOIN
 -- USING을 사용하여 컬럼을 매칭시킬 수 있다.
 SELECT
 m.member_id,
@@ -38,4 +38,3 @@ SELECT
 FROM
     members m
 INNER JOIN committees c USING(name);
-
