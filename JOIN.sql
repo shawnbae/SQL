@@ -38,3 +38,26 @@ SELECT
 FROM
     members m
 INNER JOIN committees c USING(name);
+
+-- self join
+-- INNER JOIN을 활용하여 self join을 수행한 예시 
+SELECT 
+CONCAT(m.lastName, ', ', m.firstName) AS Manager,
+CONCAT(e.lastName, ', ', e.firstName) AS 'Direct report'
+FROM employees e
+INNER JOIN employees m ON
+    m.employeeNumber = e.reportsTo
+ORDER BY Manager;
+
+-- successive row들을 비교한 예시
+SELECT 
+    c1.city,
+    c1.customerName,
+    c2.customerName
+FROM
+    customers c1
+INNER JOIN customers c2 ON
+    c1.city = c2.city
+    AND c1.customerName > c2.customerName
+ORDER BY
+    c1.city;
