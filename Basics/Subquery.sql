@@ -54,6 +54,7 @@ FROM
 GROUP BY cg.customerGroup;
 
 -- EXISTS 사용하기
+-- true / false를 반환하는 함수로, 조건에 일치하는 경우를 찾아낼 때 서브쿼리와 함께 사용한다.
 SELECT
     customerNumber,
     customerName
@@ -67,3 +68,16 @@ WHERE
             orders
         WHERE
             orders.customernumber = customers.customerNumber);
+
+-- 데이터 업데이트 시에도 활용할 수 있다.
+UPDATE employees
+SET extension = CONCAT(extension, '1')
+WHERE
+    EXISTS(
+        SELECT
+            1
+        FROM
+            offices
+        WHERE
+            city = 'San Francisco'
+                AND offices.officeCode = employees.officeCode);
