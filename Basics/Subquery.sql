@@ -52,3 +52,18 @@ FROM
         YEAR(shippedDate) = 2003
     GROUP BY customerNumber) cg
 GROUP BY cg.customerGroup;
+
+-- EXISTS 사용하기
+SELECT
+    customerNumber,
+    customerName
+FROM
+    customers
+WHERE
+    NOT EXISTS(
+        SELECT
+            1
+        FROM
+            orders
+        WHERE
+            orders.customernumber = customers.customerNumber);
