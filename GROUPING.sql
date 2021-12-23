@@ -67,3 +67,19 @@ GROUP BY
     orderYear,
     productline
 WITH ROLLUP;
+
+-- ROLLUP으로 출력되는 소계를 IF와 함께 사용하여 네이밍을 정할 수 있다.
+SELECT
+    IF(GROUPING(orderYear),
+        'All Years',
+        orderYear) orderYear,
+    IF(GROUPING(productLine),
+        'All Product Lines',
+        productLine) productLine,
+    SUM(orderValue) totalOrderValue
+FROM
+    sales
+GROUP BY
+    orderYear,
+    productline
+WITH ROLLUP;
