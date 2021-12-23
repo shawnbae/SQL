@@ -26,3 +26,44 @@ GROUP BY
     year
 HAVING
     year > 2003;
+
+-- Sample Table 만들기
+CREATE TABLE sales
+SELECT
+    productLine,
+    YEAR(orderDate) orderYear,
+    SUM(quantityOrdered * priceEach) orderValue
+FROM
+    orderDetails
+        INNER JOIN
+    orders USING (orderNumber)
+        INNER JOIN
+    products USING (productCode)
+GROUP BY
+    productLine ,
+    YEAR(orderDate);
+
+SELECT * FROM sales;
+
+-- ROLLUP을 활용한 총합 구하기
+SELECT 
+    productLine, 
+    SUM(orderValue) totalOrderValue
+FROM
+    sales
+GROUP BY 
+    productline WITH ROLLUP;
+
+-- GROUPING과 ROLLUP을 함께 활용하여 모든 GROUP에 대한 결과를 반환함
+SELECT 
+    orderYear,
+    productLine, 
+    SUM(orderValue) totalOrderValue,
+    GROUPING(orderYear),
+    GROUPING(productLine)
+FROM
+    sales
+GROUP BY 
+    orderYear,
+    productline
+WITH ROLLUP;
